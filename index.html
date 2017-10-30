@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Protocolo</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+<body>
+
+	<div class="container" id="menu">
+		<header>
+ 			<center>
+ 				<img src="logo.png" width="255" height="83" />
+ 			</center> 
+ 		</header>
+		<!-- ROW do Titulo -->
+
+		<div class="row">
+				
+			<h1>Protocolo</h1>
+
+		</div>
+
+		<!-- ROW do Formulário -->
+
+		<div class="row"    style="padding-top: 35px";>
+		
+			<div class="col-6 offset-md-3">
+			
+				<form>
+			
+					<div class="form-group">
+					    
+					    <label for="exampleFormControlInput1">Nº do Protocolo</label>
+					    
+						<div class="row">
+							
+							<div class="col">
+								<input class="form-control" size="5" maxlength="2" id="num_protocolo" onkeyup="proximoCampo(this, 'num_protocolo1')"> 	
+							</div>
+
+							<div class="col">
+								<input class="form-control" size="5" maxlength="8" id="num_protocolo1"> 
+							</div>
+
+							<div class="col">
+								<input class="form-control" size="5" maxlength="2" id="num_protocolo2">
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="form-group">
+
+						<div class="row">
+							
+							<div class="col">
+								<label for="">Página Inicial</label>
+								<input class="form-control" maxlength="4" id="pg_inicial">
+							</div>
+
+							<div class="col">
+								<label for="">Quantidade de Páginas</label>
+								<input class="form-control" maxlength="4" id="qtd_paginas">
+							</div>
+
+						</div>
+
+					</div>
+
+				</form>
+
+			</div>
+
+		</div> <!-- Fim do Formulário -->
+   	
+   		<!-- Row do Footer -->
+		<div class="row">
+			<button id="save" class="btn btn-primary" onclick="salvar()">Imprimir</button>	
+		</div>	
+					<div class="rodape">
+						<footer> 
+							<p>Prefeitura Municipal de Mesquita - RJ - Rua Arthur Oliveira Vecchi, 120 Centro - Mesquita - RJ CEP: 26553-080</p>
+							<p>2017 @Subsecretaria da Tecnologia da Informação</p>
+						</footer>
+					</div>  <!-- Fim da ROW do footer -->
+	</div>
+
+	<div style="display: none" class="carimbo" id="original"></div>
+
+	 <!-- jQuery hospedado pelo Google -->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+	<script type="text/javascript">		
+	
+	// Onclick do botão salvar vai preencher essas variáveis
+	function salvar(){
+		
+		// Obter as variáveis de input do usuário
+
+		let num_protocolo = document.getElementById("num_protocolo").value;
+		let num_protocolo1 = document.getElementById("num_protocolo1").value;
+		let num_protocolo2 = document.getElementById("num_protocolo2").value;
+		let pg_inicial = document.getElementById("pg_inicial").value;
+		let qtd_paginas = document.getElementById("qtd_paginas").value;
+		let num_pg_para_imprimir_neste_programa_do_victor_mussum = parseInt(qtd_paginas);
+
+		// Iterar pelas páginas
+
+		for(i=0; i<num_pg_para_imprimir_neste_programa_do_victor_mussum; i++){
+
+			// Número da folha
+
+			// Clonar o Span original, alterar o seu texto, tirar o diplay none e colocar no body
+
+			$("#original")
+			.clone()
+			.html("PROC: "+num_protocolo+"/"+num_protocolo1+"/"+num_protocolo2+" FLS " + pg_inicial)
+			.css('display', 'block')
+			.appendTo('body');
+
+			pg_inicial++;
+		}
+
+		$("#menu").css('display', 'none');
+
+		// Mandar o navegador Imprimir
+		window.print(print);
+		//Da refresh para o inicio
+		window.location.reload();
+	}
+
+
+	</script>
+
+	<script>
+		function proximoCampo(atual,proximo){
+		if(atual.value.length >= atual.maxLength){
+		document.getElementById(proximo).focus();
+		}
+		}
+		</script>
+</body>
+</html>
